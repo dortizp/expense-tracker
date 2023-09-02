@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { transactions } from "../data"
 import { TransactionList } from "../components/TransactionList"
 import { Title } from "../components/Title"
+import Balance from "../components/Balance"
 
 
 // transactions && console.log (transactions)
@@ -44,6 +45,8 @@ const Transactions = () => {
         { toggleTransactionType && toggleTransactionType === "incomes" &&
             <TransactionList props={incomes} />
         }
+
+        <Balance/>
         </>
     )
 }
