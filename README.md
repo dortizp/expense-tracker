@@ -1,8 +1,32 @@
-# React + Vite
+# Expense App
+This is an app to manage your expenses.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Functionality:
+- Show current balance
+- List transactions and filter by type: expenses or incomes
+- Add transaction (type, category, amount)
+- View transaction detail
+- Edit transaction
+- Delete transaction
+- Show financial report, total by categories
 
-Currently, two official plugins are available:
+Note: Categories are fixed
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requirements
+- node v18.14.2
+- npm v9.5.0
+
+## Installation
+```sh
+npm install
+```
+
+To install dependencies
+
+## Run
+```sh
+npm run dev
+```
+To run in development environment
+
+
