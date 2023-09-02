@@ -1,4 +1,5 @@
 import './App.css'
+import { useEffect, useState } from "react"
 import { CssVarsProvider } from '@mui/joy/styles';
 import Sheet from '@mui/joy/Sheet';
 import ButtonTest from './components/ButtonTest';
@@ -6,9 +7,20 @@ import CardTest from './components/CardTest';
 import TextTest from './components/TextTest';
 import TabTest from "./components/TabTest"
 import { Transactions } from './pages/Transactions';
+import { transactions } from './data';
+import { AddTransaction } from './components/AddTransaction';
 
 
 function App() {
+
+  const [lastId, setLastId] = useState(0)
+  const [transactionList, setTransactionList] = useState([])
+
+  useEffect(()=> {
+    setTransactionList(transactions)
+    setLastId(transactions.length)
+  },[])
+
 
   return (
     // <CssVarsProvider>
@@ -34,8 +46,10 @@ function App() {
     //   </Sheet>
     // </CssVarsProvider>
     <>
-      <Transactions/>
+      <AddTransaction lastId={lastId} setLastId={setLastId} setTransactions={setTransactionList}/>
+      <Transactions transactions={transactionList}/>
     </>
+
   )
 }
 

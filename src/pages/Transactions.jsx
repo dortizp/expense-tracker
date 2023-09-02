@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { transactions } from "../data"
 import { TransactionList } from "../components/TransactionList"
 import { Title } from "../components/Title"
 import Balance from "../components/Balance"
@@ -7,11 +6,12 @@ import Balance from "../components/Balance"
 
 // transactions && console.log (transactions)
 
-const Transactions = () => {
-    const expenses = transactions.filter(transaction => transaction.type === "expense")
-    const incomes  = transactions.filter(transaction => transaction.type === "income")
+const Transactions = ({transactions}) => {
 
     const [toggleTransactionType, setToggleTransactionType] = useState("")
+
+    const expenses = transactions.filter(transaction => transaction.type === "expense")
+    const incomes  = transactions.filter(transaction => transaction.type === "income")
 
     const handleToggleTransactionType = () => {
         console.log('cick', toggleTransactionType)
@@ -46,7 +46,7 @@ const Transactions = () => {
             <TransactionList props={incomes} />
         }
 
-        <Balance/>
+        <Balance transactions={transactions}/>
         </>
     )
 }

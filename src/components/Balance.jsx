@@ -1,6 +1,4 @@
-import { transactions } from "../data";
-
-const Balance = () => {
+const Balance = ({transactions}) => {
     const expenses = 
       transactions
       .filter(e => e.type === "expense")
