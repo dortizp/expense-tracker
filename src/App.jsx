@@ -21,8 +21,9 @@ function App() {
     const loadTransactions = async () => {
       const response = await getTransactions()
       setTransactionList(response)
-      setLastId(transactionList.length)
+      setLastId(response.length)
       console.log('got transactions')
+      console.log(`last id: ${response.length}`)
     }
 
     loadTransactions()
