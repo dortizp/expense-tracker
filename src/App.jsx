@@ -7,8 +7,8 @@ import CardTest from './components/CardTest';
 import TextTest from './components/TextTest';
 import TabTest from "./components/TabTest"
 import { Transactions } from './pages/Transactions';
-import { transactions } from './data';
 import { AddTransaction } from './components/AddTransaction';
+import { getTransactions } from './util/util';
 
 
 function App() {
@@ -17,8 +17,15 @@ function App() {
   const [transactionList, setTransactionList] = useState([])
 
   useEffect(()=> {
-    setTransactionList(transactions)
-    setLastId(transactions.length)
+
+    const loadTransactions = async () => {
+      const response = await getTransactions()
+      setTransactionList(response)
+      setLastId(transactionList.length)
+      console.log('got transactions')
+    }
+
+    loadTransactions()
   },[])
 
 

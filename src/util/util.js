@@ -5,3 +5,9 @@ export function getTransaction (id) {
 
     if (result) return result[0]
 }
+
+export function getTransactions() {
+    return new Promise((resolve, reject) => {
+        resolve(transactions)
+    })
+}
