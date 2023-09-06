@@ -1,54 +1,28 @@
 import { useState } from "react"
+import { TransactionForm } from "./TransactionForm"
 
 const AddTransaction = ({lastId,setLastId, setTransactions}) => {
-    const [amount, setAmount] = useState(0)
-    const [type, setType] = useState("expense")
-    const [category, setCategory] = useState("food")
 
-    const handleAddTransaction = () => {
+    const handleAddTransaction = (newTransaction) => {
 
-        const newTransaction = {
-            id: lastId + 1,
-            type: type,
-            category: category,
-            amount: Number(amount)
-        }
+        // const newTransaction = {
+        //     id: lastId + 1,
+        //     type: type,
+        //     category: category,
+        //     amount: Number(amount)
+        // }
 
         setTransactions(current => [...current, newTransaction])
-        setLastId(newTransaction.id)
+        setLastId(current => current + 1)
     }
 
     return (
         <>
-        <label>
-            <input 
-            type="text" 
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            />
-            amount
-        </label>
-        <select
-          name="type"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        >
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-        </select>
-        <select
-          name="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-            <option value="food">Food</option>
-            <option value="doctor">Doctor</option>
-        </select>
-        <button
-          onClick={handleAddTransaction}
-        >
-            Save
-        </button>
+        <TransactionForm 
+          idTransaction={null}
+          lastId={lastId}
+          handleTransaction={handleAddTransaction}
+        />
         </>
     )
 

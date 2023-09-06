@@ -6,7 +6,7 @@ import Balance from "../components/Balance"
 
 // transactions && console.log (transactions)
 
-const Transactions = ({transactions}) => {
+const Transactions = ({transactions, setTransactions}) => {
 
     const [toggleTransactionType, setToggleTransactionType] = useState("")
 
@@ -39,11 +39,11 @@ const Transactions = ({transactions}) => {
             {toggleTransactionType}
         </button>
         { toggleTransactionType && toggleTransactionType === "expenses" && 
-            <TransactionList props={expenses} />
+            <TransactionList data={expenses} setTransactions={setTransactions} />
         }
 
         { toggleTransactionType && toggleTransactionType === "incomes" &&
-            <TransactionList props={incomes} />
+            <TransactionList data={incomes} setTransactions={setTransactions} />
         }
 
         <Balance transactions={transactions}/>

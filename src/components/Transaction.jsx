@@ -7,10 +7,10 @@ const StyledDiv = styled.div`
   display: flex;
   gap: 10px;
 `
-const Transaction = ({props}) => {
+const Transaction = (props) => {
 
 
-    const {id, type, category, amount} = props
+    const {id, type, category, amount, setTransactions } = props
 
     const [showTransaction, setShowTransaction] = useState(false)
 
@@ -46,7 +46,7 @@ const Transaction = ({props}) => {
                 </p>
             </StyledDiv>
           </div>
-          { showTransaction ? <TransactionDetail transactionId={id} /> : "" }
+          { showTransaction ? <TransactionDetail idTransaction={id} setTransactions={setTransactions}/> : "" }
         </>
     )
 }

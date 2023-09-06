@@ -55,7 +55,7 @@ function App() {
     // </CssVarsProvider>
     <>
       <AddTransaction lastId={lastId} setLastId={setLastId} setTransactions={setTransactionList}/>
-      <Transactions transactions={transactionList}/>
+      <Transactions transactions={transactionList} setTransactions={setTransactionList}/>
     </>
 
   )
