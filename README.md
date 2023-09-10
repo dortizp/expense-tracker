@@ -1,6 +1,8 @@
 # Expense App
 This is an app to manage your expenses.
 
+[this github repository](https://github.com/dortizp/expense-tracker)
+
 ### Functionality:
 - Show current balance
 - List transactions and filter by type: expenses or incomes

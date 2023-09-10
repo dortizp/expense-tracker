@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { useState } from "react"
 import { TransactionDetail } from "../pages/TransactionDetail"
+import { getTransaction } from "../util/util"
 
 const StyledDiv = styled.div`
   border: 1px solid black;
@@ -13,6 +14,13 @@ const Transaction = (props) => {
     const {id, type, category, amount, setTransactions } = props
 
     const [showTransaction, setShowTransaction] = useState(false)
+
+    const deleteTransaction = (id)=> {
+
+      const transaction = getTransaction(id)
+
+      setTransactions(current => current.filter(x => x.id !== transaction.id))
+    }
 
 
     return (
@@ -44,6 +52,11 @@ const Transaction = (props) => {
                     <span>amount : </span>
                     <span>{amount}</span>
                 </p>
+                {
+                  <button
+                  onClick={()=> deleteTransaction(id)}
+                  >Delete</button>
+                }
             </StyledDiv>
           </div>
           { showTransaction ? <TransactionDetail idTransaction={id} setTransactions={setTransactions}/> : "" }
