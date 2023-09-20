@@ -16,8 +16,8 @@ export async function getTransactions() {
     // })
     const endpoint = "transactions"
     const url = `${host}:${port}/${endpoint}`  
-    console.log(url)
     const response = await fetch(url)
     const transactions = await response.json()
+
     return transactions
 }

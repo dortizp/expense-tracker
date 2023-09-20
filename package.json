@@ -16,6 +16,8 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/joy": "^5.0.0-beta.2",
     "@mui/material": "^5.14.5",
+    "@tanstack/react-query": "^4.35.3",
+    "@tanstack/react-query-devtools": "^4.35.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
