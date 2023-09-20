@@ -14,9 +14,9 @@ export async function getTransaction (id) {
 
 }
 
-export async function getTransactions() {
+export async function getTransactions(page, pageSize) {
     const endpoint = "transactions"
-    const url = `${host}:${port}/${endpoint}`  
+    const url = `${host}:${port}/${endpoint}?page=${page}&pageSize=${pageSize}`  
     const response = await fetch(url)
     const transactions = await response.json()
 
