@@ -1,7 +1,8 @@
 import styled from "@emotion/styled"
 import { useState } from "react"
 import { TransactionDetail } from "../pages/TransactionDetail"
-import { getTransaction } from "../util/util"
+import { getTransaction, deleteTransaction } from "../util/util"
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 const StyledDiv = styled.div`
   border: 1px solid black;
@@ -10,58 +11,61 @@ const StyledDiv = styled.div`
 `
 const Transaction = (props) => {
 
+  const { mutate, isLoading: isDeleteLoading, isError, error } = useMutation(deleteTransaction)
 
-    const {id, type, category, amount, setTransactions } = props
+  const { id, type, category, amount, setTransactions } = props
 
-    const [showTransaction, setShowTransaction] = useState(false)
+  const [showTransaction, setShowTransaction] = useState(false)
 
-    const deleteTransaction = (id)=> {
+  return (
+    <>
+      <div>
+        {/* Query loading state */}
+        {/* {isQueryLoading && <p>Loading transactions...</p>} */}
 
-      const transaction = getTransaction(id)
 
-      setTransactions(current => current.filter(x => x.id !== transaction.id))
-    }
+        {
+          <StyledDiv key={id}
+          >
 
-
-    return (
-        <>
-          <div>
-            <StyledDiv key={id}
+            <button
+              onClick={() => {
+                setShowTransaction(current => !current)
+                console.log(id, showTransaction)
+              }}
             >
-                {/* <p>
-                    <span>type : </span>
-                    <span>{type}</span>
-                </p> */}
-                <button
-                  onClick={() => {
-                    setShowTransaction(current => !current)
-                    console.log(id, showTransaction)
-                  }}
-                >
-                {
-                  !showTransaction
+              {
+                !showTransaction
                   ? "show"
                   : "close"
-                }
-                </button>
-                <p>
-                    <span>category : </span>
-                    <span>{category}</span>
-                </p>
-               <p>
-                    <span>amount : </span>
-                    <span>{amount}</span>
-                </p>
-                {
-                  <button
-                  onClick={()=> deleteTransaction(id)}
-                  >Delete</button>
-                }
-            </StyledDiv>
-          </div>
-          { showTransaction ? <TransactionDetail idTransaction={id} setTransactions={setTransactions}/> : "" }
-        </>
-    )
+              }
+            </button>
+            <p>
+              <span>category : </span>
+              <span>{category}</span>
+            </p>
+            <p>
+              <span>amount : </span>
+              <span>{amount}</span>
+            </p>
+            {
+              <button
+                onClick={() => mutate(id)}
+              >Delete</button>
+            }
+          </StyledDiv>
+
+        }
+      </div>
+      {showTransaction ? <TransactionDetail idTransaction={id} setTransactions={setTransactions} /> : ""}
+
+      {/* Loading state */}
+      {isDeleteLoading && <p>Deleting transaction...</p>}
+
+      {/* Error state */}
+      {isError && <p>Error: {error.message}</p>}
+    </>
+  )
 }
 
 export { Transaction }
