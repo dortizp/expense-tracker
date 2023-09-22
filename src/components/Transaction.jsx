@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import { useState } from "react"
 import { TransactionDetail } from "../pages/TransactionDetail"
 import { getTransaction, deleteTransaction } from "../util/util"
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, QueryClient, useQueryClient } from '@tanstack/react-query';
 
 const StyledDiv = styled.div`
   border: 1px solid black;
@@ -11,9 +11,17 @@ const StyledDiv = styled.div`
 `
 const Transaction = (props) => {
 
-  const { mutate, isLoading: isDeleteLoading, isError, error } = useMutation(deleteTransaction)
+  const queryClient = useQueryClient()
+
+  const { mutate, isLoading: isDeleteLoading, isError, error } = useMutation({
+    mutationFn: deleteTransaction,
+    onSuccess: () => queryClient.invalidateQueries({queryKey:['transactions']})
+  }
+    )
 
   const { id, type, category, amount, setTransactions } = props
+
+  console.log('id props', id)
 
   const [showTransaction, setShowTransaction] = useState(false)
 
